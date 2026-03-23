@@ -98,14 +98,17 @@ public class KinectJump : MonoBehaviour
         GameOver();
          GameManager.instance.GameOver();
     }
-        if (_reader != null)
+        if (_reader != null) 
         {
+            Debug.Log("reader != null");
             var frame = _reader.AcquireLatestFrame();
             if (frame != null)
             {
+                Debug.Log("frame !=null");
                 if (_bodies == null)
                 {
-                    _bodies = new Body[_sensor.BodyFrameSource.BodyCount];
+                    Debug.Log("bodies == null");
+                  _bodies = new Body[_sensor.BodyFrameSource.BodyCount];
                 }
 
                 frame.GetAndRefreshBodyData(_bodies);
@@ -117,6 +120,7 @@ public class KinectJump : MonoBehaviour
                 {
                     if (body != null && body.IsTracked)
                     {
+                        Debug.Log("body != null && body.IsTracked");
                         bodyTracked = true;
                         
                         // We use SpineBase as a reliable center of mass point for jump calculation
@@ -131,10 +135,11 @@ public class KinectJump : MonoBehaviour
                         // Initialize first frame
                     if (lastSpineY == 0f)
                      {
+                        Debug.Log("LastSpine ==0f");
                    lastSpineY = currentSpineY;
                    lastLeftFootY = currentLeftFootY;
                    lastRightFootY = currentRightFootY;
-                 return;
+                 //return;
                     }
                         {
                             // Calculate upward velocity per frame for spine and feet
@@ -178,6 +183,7 @@ public class KinectJump : MonoBehaviour
 
                 if (!bodyTracked)
                 {
+                    Debug.Log("!bodyTracked");
                     lastSpineY = 0f;
                     lastLeftFootY = 0f;
                     lastRightFootY = 0f;
